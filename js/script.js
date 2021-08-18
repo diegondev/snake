@@ -47,8 +47,13 @@ function iniciarJogo() {
     if (direction === 'left') snakeX -= box;
     if (direction === 'up') snakeY -= box;
     if (direction === 'down') snakeY += box;
-    
-    snake.pop();
+
+    if (snakeX != comida.x || snakeY != comida.y) {
+        snake.pop();
+    } else {
+        comida.x = Math.floor(Math.random() * 15 + 1) * box;
+        comida.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
 
     let newHead = {
         x: snakeX,
@@ -67,4 +72,4 @@ function update(event) {
     if (event.keyCode === 40 && direction != 'up') direction = 'down';
 }
 
-let jogo = setInterval(iniciarJogo, 500);
+let jogo = setInterval(iniciarJogo, 50);
